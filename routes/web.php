@@ -14,8 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('/test', function () {
-    return 'oui';
+    return view('test');
 });
 
 Auth::routes();
