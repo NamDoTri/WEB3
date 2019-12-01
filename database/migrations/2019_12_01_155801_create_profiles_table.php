@@ -15,12 +15,15 @@ class CreateProfilesTable extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
             $table->string('name')->unique();
-            $table->integer('post');
+            $table->integer('posts');
             $table->integer('followers');
             $table->integer('following');
             $table->text('description');
             $table->timestamps();
+
+            $table->index('user_id');
         });
     }
 
