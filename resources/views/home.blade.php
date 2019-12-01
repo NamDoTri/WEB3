@@ -9,12 +9,12 @@
     <div class="col-9 p-5">
         <div><h2>{{$user->name}}</h2></div>
         <div class="d-flex">
-            <div class="pr-5"><strong>32</strong> posts</div>
-            <div class="pr-5"><strong>224</strong> followers</div>
-            <div class="pr-5"><strong>447</strong> following</div>
+            <div class="pr-5"><strong>{{$user->profile->posts}}</strong> posts</div>
+            <div class="pr-5"><strong>{{$user->profile->followers}}</strong> followers</div>
+            <div class="pr-5"><strong>{{$user->profile->following}}</strong> following</div>
         </div>
         <div>
-            <!--description goes here-->
+            {{$user->profile->description}}
         </div>
     </div>
 </div>
