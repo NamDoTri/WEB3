@@ -15,6 +15,11 @@ class CreateProfilesTable extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name')->unique();
+            $table->integer('post');
+            $table->integer('followers');
+            $table->integer('following');
+            $table->text('description');
             $table->timestamps();
         });
     }
