@@ -4,7 +4,7 @@
 <!--Header of personal profile page-->
 <div class="row">
     <div class="col-3 p-5">
-        <img src="https://scontent-ams4-1.cdninstagram.com/vp/997a569d88c3924d1c92313ccdb0781d/5E88BFD8/t51.2885-19/s320x320/76880688_2770079693023939_7526676684385288192_n.jpg?_nc_ht=scontent-ams4-1.cdninstagram.com" class="rounded-circle" height=190px>
+        <img src="<?php echo $user->profile->profile_picture ?>" class="rounded-circle" height=190px>
     </div>
     <div class="col-9 p-5">
         <div><h2>{{$user->name}}</h2></div>
@@ -18,8 +18,19 @@
         </div>
     </div>
 </div>
+<div class="row d-flex justify-content-center">
+    <button>
+        Add image <!--TODO: change this to a plus icon-->
+    </button>
+</div>
 <!--Posts go here-->
 <div class="row">
-    
+    <div class="col-3">
+        <?php 
+            foreach($posts as $post){
+                echo '<img src='.$post->host_link.'>';
+            }
+        ?>
+    </div>
 </div>
 @endsection
