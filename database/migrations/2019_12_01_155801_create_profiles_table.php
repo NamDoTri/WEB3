@@ -18,7 +18,7 @@ class CreateProfilesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('profile_picture')->nullable();
             $table->string('name')->unique();
-            $table->integer('posts');
+            $table->integer('posts'); //to be removed
             $table->integer('followers');
             $table->integer('following');
             $table->text('description');

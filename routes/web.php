@@ -22,7 +22,11 @@ Route::get('/home', 'HomeController@index');
 Auth::routes();
 
 Route::get('/profile/{user}', 'ProfileController@index')->name('profile.show');
+
 Route::get('/p/create', 'PostController@create');
+Route::get('/p/{post}', 'PostController@show');
 Route::post('/post', 'PostController@store');
+
+Route::get('/instagram/update/{user}', 'ProfileController@updateInstagram');
 
 Route::resource('pictures', 'PictureController'); 

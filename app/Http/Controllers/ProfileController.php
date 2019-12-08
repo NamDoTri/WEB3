@@ -18,4 +18,14 @@ class ProfileController extends Controller
             'posts' => $posts,
         ]);
     }
+
+    public function updateInstagram($user){
+        $user = User::findOrFail($user);
+        //the argument passed in is userid, query for handle
+
+        //then update the posts here
+
+
+        return redirect('/profile/'.$user->id);
+    }
 }

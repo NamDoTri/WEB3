@@ -9,7 +9,7 @@
     <div class="col-9 p-5">
         <div><h2>{{$user->name}}</h2></div>
         <div class="d-flex">
-            <div class="pr-5"><strong>{{$user->profile->posts}}</strong> posts</div>
+            <div class="pr-5"><strong>{{$user->posts->count()}}</strong> posts</div>
             <div class="pr-5"><strong>{{$user->profile->followers}}</strong> followers</div>
             <div class="pr-5"><strong>{{$user->profile->following}}</strong> following</div>
         </div>
@@ -19,18 +19,14 @@
     </div>
 </div>
 <div class="row d-flex justify-content-center">
-    <button>
-        Add image <!--TODO: change this to a plus icon-->
-    </button>
+    <a href="/instagram/update/{{$user->id}}">Update Instagram pictures</a>
 </div>
 <!--Posts go here-->
 <div class="row">
     <div class="col-3">
-        <?php 
-            foreach($posts as $post){
-                echo '<img src='.$post->host_link.'>';
-            }
-        ?>
+    @foreach($user->posts as $post)
+        <a href="/p/{{$post->id}}"><img src="{{$post->host_link}}" width=250px></a>
+    @endforeach
     </div>
 </div>
 @endsection
