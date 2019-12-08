@@ -17,6 +17,12 @@ Route::get('/', function () {
 
 Route::get('/test', 'TestController@test');
 
+Route::get('/home', 'HomeController@index');
+
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/profile/{user}', 'ProfileController@index')->name('profile.show');
+Route::get('/p', 'PostController@create');
+Route::post('/post', 'PostController@store');
+
+Route::resource('pictures', 'PictureController'); 
