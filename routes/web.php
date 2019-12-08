@@ -17,11 +17,11 @@ Route::get('/', function () {
 
 Route::get('/test', 'TestController@test');
 
-Route::get('/home', 'HomeController@index');
-
 Auth::routes();
 
 Route::get('/profile/{user}', 'ProfileController@index')->name('profile.show');
+Route::get('/profile/{user}/edit', 'ProfileController@edit');
+Route::patch('/profile/{user}', 'ProfileController@update')->name('profile.update');
 
 Route::get('/p/create', 'PostController@create');
 Route::get('/p/{post}', 'PostController@show');
