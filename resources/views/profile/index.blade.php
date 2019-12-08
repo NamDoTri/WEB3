@@ -8,9 +8,9 @@
     </div>
     <div class="col-9 p-5">
         <div><h2>{{$user->profile->name}}</h2></div>
-        @auth
+        @can('update', $user->profile)
         <a href="/profile/{{$user->id}}/edit">Edit profile</a>
-        @endauth
+        @endcan
         <div class="d-flex">
             <div class="pr-5"><strong>{{$user->posts->count()}}</strong> posts</div>
             <div class="pr-5"><strong>{{$user->profile->followers}}</strong> followers</div>
