@@ -7,7 +7,10 @@
         <img src="<?php echo $user->profile->profile_picture ?>" class="rounded-circle" height=190px>
     </div>
     <div class="col-9 p-5">
-        <div><h2>{{$user->name}}</h2></div>
+        <div><h2>{{$user->profile->name}}</h2></div>
+        @auth
+        <a href="/profile/{{$user->id}}/edit">Edit profile</a>
+        @endauth
         <div class="d-flex">
             <div class="pr-5"><strong>{{$user->posts->count()}}</strong> posts</div>
             <div class="pr-5"><strong>{{$user->profile->followers}}</strong> followers</div>
