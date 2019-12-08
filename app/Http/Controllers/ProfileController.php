@@ -8,19 +8,15 @@ use App\Post;
 
 class ProfileController extends Controller
 {
-    public function index($user)
+    public function index(\App\User $user)
     {
-        $user = User::findOrFail($user);
-        $posts = Post::findOrFail($user);
         //TODO: if the numbers are bigger than 10k, divide them by 1k before passing to the view
         return view('profile/index',[
             'user' => $user,
-            'posts' => $posts,
         ]);
     }
 
-    public function updateInstagram($user){
-        $user = User::findOrFail($user);
+    public function updateInstagram(\App\User $user){
         //the argument passed in is userid, query for handle
 
         //then update the posts here
