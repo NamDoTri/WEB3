@@ -21,9 +21,12 @@
         </div>
     </div>
 </div>
-<div class="row d-flex justify-content-center">
-    <a href="/instagram/update/{{$user->id}}">Update Instagram pictures</a>
-</div>
+
+@can('update', $user->profile)
+    <div class="row d-flex justify-content-center">
+        <a href="/instagram/update/{{$user->id}}">Update Instagram pictures</a>
+    </div>
+@endcan
 <!--Posts go here-->
 <div class="row">
     <div class="col-3">
