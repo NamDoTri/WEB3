@@ -27,17 +27,27 @@
         <!-- <a href="/instagram/update/{{$user->id}}">Update Instagram pictures</a> -->
         <insta-update></insta-update>
     </div>
+    @if ($user->role=='picture')
     <div>
         <a href="{{route('pictures.create')}}">Add a new picture</a>
     </div>
+    @endif
 @endcan
 <!--Posts go here-->
 <div class="row">
+    @if ($user->role =='picture')
+        <div class="col-3">
+        @foreach($user->pictures as $picture)
+            <a href="{{route('pictures.show', $picture->id )}}"><img src="{{$picture->filepath}}" width=250px></a>
+        @endforeach
+        </div>
+    @else
     <div class="col-3">
-    @foreach($user->pictures as $picture)
-        <a href="{{route('pictures.show', $picture->id )}}"><img src="{{$picture->filepath}}" width=250px></a>
-    @endforeach
-    </div>
+        @foreach($user->critics as $critic)
+            <a href="{{route('pictures.show', $critic->picture->id )}}"><img src="{{$critic->picture->filepath}}" width=250px></a>
+        @endforeach
+        </div>
+    @endif
 </div>
 
 @endsection

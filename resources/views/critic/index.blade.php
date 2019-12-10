@@ -2,6 +2,6 @@
 
 @section('content')
 <div class="row">
-    Critic view here
+    critic view
 </div>
 @endsection
