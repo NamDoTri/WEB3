@@ -21,6 +21,7 @@ class CreatePicturesTable extends Migration
                 ->on('users')
                 ->onDelete('cascade');
             $table->string('filepath')->nullable();
+            $table->string('caption')->nullable();
             $table->timestamps();
         });
     }

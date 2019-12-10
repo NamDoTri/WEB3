@@ -27,12 +27,15 @@
         <!-- <a href="/instagram/update/{{$user->id}}">Update Instagram pictures</a> -->
         <insta-update></insta-update>
     </div>
+    <div>
+        <a href="{{route('pictures.create')}}">Add a new picture</a>
+    </div>
 @endcan
 <!--Posts go here-->
 <div class="row">
     <div class="col-3">
-    @foreach($user->posts as $post)
-        <a href="/p/{{$post->id}}"><img src="{{$post->host_link}}" width=250px></a>
+    @foreach($user->pictures as $picture)
+        <a href="#"><img src="{{$picture->filepath}}" width=250px></a>
     @endforeach
     </div>
 </div>

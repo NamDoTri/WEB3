@@ -30,5 +30,6 @@ class PostController extends Controller
         ]);
 
         auth()->user()->posts()->create($data);
+        return redirect('/');
     }
 }

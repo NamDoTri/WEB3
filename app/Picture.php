@@ -10,4 +10,8 @@ class Picture extends Model
     {
         return view('profile.index');
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

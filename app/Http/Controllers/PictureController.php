@@ -64,6 +64,7 @@ class PictureController extends Controller
         }
         $user_id = auth()->user()->id;
         $request->validate([
+            'caption' => '',
             'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         $image = $request->file('file');
@@ -73,6 +74,7 @@ class PictureController extends Controller
         $folder = '/uploads/images/';
         $filePath = $folder . $imageName;
         $file = $image->storeAs($folder, $imageName, 'public');
+        $picture->caption = $request->caption;
         $picture->filepath = $filePath;
         $picture->save();
         return Redirect::to('pictures')

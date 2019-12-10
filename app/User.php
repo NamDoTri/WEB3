@@ -55,6 +55,9 @@ class User extends Authenticatable
     public function posts(){
         return $this->hasMany(Post::class)->orderBy('created_at', 'DESC');
     }
+    public function pictures(){
+        return $this->hasMany(Picture::class)->orderBy('created_at', 'DESC');
+    }
 
     public function hasRole($role) {
         return $this->getAttribute('role') == $role;

@@ -21,8 +21,6 @@ Route::patch('/profile/{user}', 'ProfileController@update')->name('profile.updat
 
 Route::get('/p/create', 'PostController@create');
 Route::get('/p/{post}', 'PostController@show');
-Route::post('/post', 'PostController@store');
-
-Route::get('/instagram/update/{user}', 'ProfileController@updateInstagram');
+Route::post('/p/upload', 'PostController@store');
 
 Route::resource('pictures', 'PictureController'); 
