@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<a href="{{ route('pictures.create') }}" class="btn btn-success mb-2">Add</a> 
+<h2 class="text-center m-4">Uploaded images</a></h2>
+
+<div class='text-right px-2'>
+   <a href="{{ route('pictures.create') }}" class="btn btn-primary mb-2">Add</a> 
+</div>
   <br>
    <div class="row">
         <div class="col-12">
