@@ -8,9 +8,9 @@ use App\Post;
 
 class ProfileController extends Controller
 {
-    public function index()
+    public function index(User $user)
     {
-        $user = auth()->user();
+        //$user = auth()->user();
         //TODO: if the numbers are bigger than 10k, divide them by 1k before passing to the view
         return view('profile/index', compact('user'));
     }

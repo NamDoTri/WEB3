@@ -9,6 +9,12 @@ class PostController extends Controller
     public function __construct(){
         $this->middleware('auth');
     }
+
+    public function index(){
+        $user = auth()->user();
+        return redirect('/profile/'.$user->id);
+    }
+
     public function create(){
         return view('posts/create');
     }
