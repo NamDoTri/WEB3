@@ -35,7 +35,7 @@
 <div class="row">
     <div class="col-3">
     @foreach($user->pictures as $picture)
-        <a href="#"><img src="{{$picture->filepath}}" width=250px></a>
+        <a href="{{route('pictures.show', $picture->id )}}"><img src="{{$picture->filepath}}" width=250px></a>
     @endforeach
     </div>
 </div>

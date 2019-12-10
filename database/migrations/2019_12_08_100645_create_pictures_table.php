@@ -22,6 +22,8 @@ class CreatePicturesTable extends Migration
                 ->onDelete('cascade');
             $table->string('filepath')->nullable();
             $table->string('caption')->nullable();
+            $table->integer('likes')->default(0);
+            $table->text('critic')->nullable();
             $table->timestamps();
         });
     }

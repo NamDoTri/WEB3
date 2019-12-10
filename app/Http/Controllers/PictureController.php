@@ -77,7 +77,7 @@ class PictureController extends Controller
         $picture->caption = $request->caption;
         $picture->filepath = $filePath;
         $picture->save();
-        return Redirect::to('pictures')
+        return Redirect::to('/')
             ->with('success','Greate! Picture created successfully.');
     }
 
@@ -87,9 +87,9 @@ class PictureController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(\App\Picture $picture)
     {
-        //
+        return view('picture/show', compact('picture'));
     }
 
     /**
