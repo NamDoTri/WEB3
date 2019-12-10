@@ -13,8 +13,6 @@
 
 Route::get('/', 'PostController@index');
 
-Route::get('/home', 'HomeController@index');
-
 Auth::routes();
 
 Route::get('/profile/{user}', 'ProfileController@index')->name('profile.show');
