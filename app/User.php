@@ -58,6 +58,9 @@ class User extends Authenticatable
     public function pictures(){
         return $this->hasMany(Picture::class)->orderBy('created_at', 'DESC');
     }
+    public function critics(){
+        return $this->hasMany(Critic::class)->orderBy('created_at', 'DESC');
+    }
 
     public function hasRole($role) {
         return $this->getAttribute('role') == $role;
