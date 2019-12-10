@@ -4,7 +4,7 @@
 <!--Header of personal profile page-->
 <div class="row">
     <div class="col-3 p-5">
-        <img src="<?php echo $user->profile->profile_picture ?>" class="rounded-circle" height=190px>
+        <img src="<?php echo $user->profile->profile_picture ?? 'https://www.sackettwaconia.com/wp-content/uploads/default-profile.png' ?>" class="rounded-circle" height=190px>
     </div>
     <div class="col-9 p-5">
         <div><h2>{{$user->profile->name}}</h2></div>
@@ -24,7 +24,8 @@
 
 @can('update', $user->profile)
     <div class="row d-flex justify-content-center">
-        <a href="/instagram/update/{{$user->id}}">Update Instagram pictures</a>
+        <!-- <a href="/instagram/update/{{$user->id}}">Update Instagram pictures</a> -->
+        <insta-update></insta-update>
     </div>
 @endcan
 <!--Posts go here-->
@@ -35,4 +36,5 @@
     @endforeach
     </div>
 </div>
+
 @endsection
