@@ -23,4 +23,6 @@ Route::get('/p/create', 'PostController@create');
 Route::get('/p/{post}', 'PostController@show');
 Route::post('/p/upload', 'PostController@store');
 
+Route::get('/crits/{user}', 'CriticController@index');
+
 Route::resource('pictures', 'PictureController'); 
