@@ -11,6 +11,6 @@ class Critic extends Model
         return $this->belongsTo(User::class);
     }
     public function picture(){
-        return $this->belongsTo(Critic::class);
+        return $this->belongsTo(Picture::class);
     }
 }
