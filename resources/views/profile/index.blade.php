@@ -9,15 +9,15 @@
     <div class="col-9 p-5">
         <div><h2>{{$user->profile->name}}</h2></div>
         @can('update', $user->profile)
-        <a href="/profile/{{$user->id}}/edit">Edit profile</a>
+        <a href="/profile/{{$user->id}}/edit" class="">Edit profile</a>
         @endcan
         <div class="d-flex">
             <div class="pr-5"><strong>{{$user->pictures->count()}}</strong> posts</div>
             <div class="pr-5"><strong>{{$user->profile->followers}}</strong> followers</div>
             <div class="pr-5"><strong>{{$user->profile->following}}</strong> following</div>
         </div>
-        <div>
-            <b>Bio:</b>{{$user->profile->description}}
+        <div class="pt-3">
+            <b class="pr-3">Bio</b>{{$user->profile->description}}
         </div>
         <div>
             <b>Joined us on:</b> {{ date('F d, Y', strtotime($user->created_at)) }}
@@ -28,20 +28,20 @@
 @can('update', $user->profile)
     <div class="row d-flex justify-content-center">
         <!-- <a href="/instagram/update/{{$user->id}}">Update Instagram pictures</a> -->
-        <insta-update></insta-update>
+        <!-- <insta-update></insta-update> -->
     </div>
     @if ($user->role=='picture')
     <div>
-        <a href="{{route('pictures.create')}}">Add a new picture</a>
+        <a href="{{route('pictures.create')}}" class="pb-2 btn btn-primary">Add a new picture</a>
     </div>
     @endif
 @endcan
 <!--Posts go here-->
-<div class="row">
+<div class="row pt-3">
     @if ($user->role =='picture')
-        <div class="col-3">
+        <div class="col-3 d-flex">
         @foreach($user->pictures as $picture)
-            <a href="{{route('pictures.show', $picture->id )}}"><img src="{{$picture->filepath}}" width=250px></a>
+            <a href="{{route('pictures.show', $picture->id )}}" class='p-2'><img src="{{$picture->filepath}}" width=250px></a>
         @endforeach
         </div>
     @else
