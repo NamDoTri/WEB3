@@ -15,8 +15,9 @@ class Critics extends Migration
     {
         Schema::create('critics', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger("user_id");
+            $table->integer("user_id");
             $table->unsignedBigInteger('picture_id');
+            $table->string('title');
             $table->text('review');
             $table->integer('agrees')->default(0);
             $table->integer('disagrees')->default(0);
