@@ -17,7 +17,10 @@
             <div class="pr-5"><strong>{{$user->profile->following}}</strong> following</div>
         </div>
         <div>
-            {{$user->profile->description}}
+            <b>Bio:</b>{{$user->profile->description}}
+        </div>
+        <div>
+            <b>Joined us on:</b> {{ date('F d, Y', strtotime($user->created_at)) }}
         </div>
     </div>
 </div>

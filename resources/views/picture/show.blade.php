@@ -2,12 +2,17 @@
 
 @section('content')
 <div class="container">
-    <img src="{{$picture->filepath}}" width=600>
     <div>
-        <span>{{$picture->caption}}</span>
+        <span> <b>{{$picture->user->profile->name}}</b> {{$picture->caption}}</span>
         <span>{{$picture->likes}} likes</span>
     </div>
+    <img src="{{$picture->filepath}}" width=600>
+
     <a href="/crits/create/{{$picture->id}}">Write a review</a>
-    <div>There must be something printed after this: {{$picture}}</div>
+    <div>
+        A critic by <b>{{$picture->critic->user->profile->name}}</b>
+        <h4>{{$picture->critic->title}}</h4>
+        <p>{{$picture->critic->review}}</p>
+    </div>
 </div>
 @endsection
