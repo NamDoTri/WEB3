@@ -16,7 +16,7 @@ class CriticController extends Controller
     public function store(\App\Picture $picture){
         $data = request()->validate([
             'title' => 'required',
-            'review' => 'required',
+            'review' => 'required|min:100',
         ]);
         $data = array_merge($data,[
             'user_id' => auth()->user()->id,
