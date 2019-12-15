@@ -29,6 +29,10 @@ class PostController extends Controller
         return view('posts/show', compact('post'));
     }
 
+    public function edit(\App\Picture $picture){
+        return view('posts/edit', compact('picture'));
+    }
+
     public function store(){
         $data = request()->validate([
             'caption' => '',
@@ -36,6 +40,14 @@ class PostController extends Controller
         ]);
 
         auth()->user()->posts()->create($data);
+        return redirect('/');
+    }
+    public function update(){
+        $data = request()->validate([
+            'caption' => '',
+            'image' => 'required|image',
+        ]);
+        $picture->update($data);
         return redirect('/');
     }
 }
