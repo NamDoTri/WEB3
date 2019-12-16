@@ -25,7 +25,7 @@
                  <td>{{ $picture->id }}</td>
                  <td><img src="{{ $picture->filepath }}" style="width: 30%; height: 30%; border-radius: 5%;"></td>
                  <td>{{ date('Y-m-d', strtotime($picture->created_at)) }}</td>
-                 <td><a href="{{ route('pictures.edit',$picture->id)}}" class="btn btn-primary">Edit</a></td>
+                 <td><a href="/p/{{$picture->id}}/edit" class="btn btn-primary">Edit</a></td>
                  <td>
                  <form action="{{ route('pictures.destroy', $picture->id)}}" method="post">
                   {{ csrf_field() }}

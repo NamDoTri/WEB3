@@ -28,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/profile/1'; //TODO: find a way to pass a specific ID here
+    protected $redirectTo = '/'; 
 
     /**
      * Create a new controller instance.
@@ -37,7 +37,6 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
     }
 
     /**

@@ -11,16 +11,23 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/home', 'HomeController@index');
+Route::get('/', 'HomeController@index');
 
 Auth::routes();
 
 Route::get('/profile/{user}', 'ProfileController@index')->name('profile.show');
-Route::get('/p', 'PostController@create');
-Route::post('/post', 'PostController@store');
+Route::get('/profile/{user}/edit', 'ProfileController@edit');
+Route::patch('/profile/{user}', 'ProfileController@update')->name('profile.update');
+
+Route::get('/p/create', 'PostController@create');
+Route::get('/p/{picture}/edit', 'PostController@edit');
+Route::get('/p/{post}', 'PostController@show');
+Route::post('/p/upload', 'PostController@store');
+Route::patch('/p/{picture}', 'PostController@update');
+
+Route::get('/crits/{user}', 'CriticController@index');
+Route::get('/crits/show', 'CriticController@show');
+Route::get('/crits/create/{picture}', 'CriticController@create');
+Route::post('/crits/upload/{picture}', 'CriticController@store');
 
 Route::resource('pictures', 'PictureController'); 

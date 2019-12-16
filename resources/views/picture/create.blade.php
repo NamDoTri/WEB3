@@ -28,6 +28,13 @@
   </div>
 </div>
 
+<div class="input-group m-4">
+  <div class="mr-4">
+    <input type="text" class="" name='caption'>
+    <label class="" for="caption">Caption</label>
+  </div>
+</div>
+
 <!--
    <div class="form-group">
         <label for="file">File:</label>
