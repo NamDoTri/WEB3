@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use App\Picture;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        if (!Auth::check()) {
+            return redirect('/login');   
+        }
+        $data['pictures'] = Picture::orderBy('created_at','desc')->paginate(10);
+        return view('welcome',$data);
     }
 }

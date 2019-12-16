@@ -11,7 +11,7 @@ use Auth;
 class PictureController extends Controller
 {
     public function __contruct(){
-        //$this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
@@ -64,7 +64,9 @@ class PictureController extends Controller
         }
         $user_id = auth()->user()->id;
         $request->validate([
+            'caption' => '',
             'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'file' => 'max:500000'
         ]);
         $image = $request->file('file');
         $picture = new Picture;
@@ -73,9 +75,10 @@ class PictureController extends Controller
         $folder = '/uploads/images/';
         $filePath = $folder . $imageName;
         $file = $image->storeAs($folder, $imageName, 'public');
+        $picture->caption = $request->caption;
         $picture->filepath = $filePath;
         $picture->save();
-        return Redirect::to('pictures')
+        return Redirect::to('/')
             ->with('success','Greate! Picture created successfully.');
     }
 
@@ -85,9 +88,9 @@ class PictureController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(\App\Picture $picture)
     {
-        //
+        return view('picture/show', compact('picture'));
     }
 
     /**
