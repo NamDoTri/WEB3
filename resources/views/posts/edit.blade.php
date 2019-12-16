@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <form action="/p/{{$picture->id}}/" method=post>
+    <form action="/p/{{$picture->id}}/" method=post enctype="multipart/form-data">
     @csrf
     @method('PATCH')
 
@@ -17,11 +17,10 @@
                         <img src="{{$picture->filepath}}">
                     </div>
                     <div class="pt-3">
-                        <label for="image" style="cursor: pointer;" class="btn btn-primary p-1">Choose another image</label>
-                        <input type="file" class=form-control-file id=image name=image style="display: none">
-                        @if ($errors->has('image'))
-                            <!-- <strong>{{ $errors->first('image') }}</strong> -->
-                            {{dd($errors)}}
+                        <label for="picture" style="cursor: pointer;" class="btn btn-primary p-1">Choose another picture</label>
+                        <input type="file" class=form-control-file id=picture name=picture style="display: none">
+                        @if ($errors->has('picture'))
+                            <strong>{{ $errors->first('picture') }}</strong>
                         @endif
                     </div>
                 </div>
@@ -32,7 +31,7 @@
                     <input id="caption" 
                         type="text"
                         class="form-control @error('caption') is-invalid @enderror" 
-                        caption="caption" 
+                        name="caption" 
                         value="{{ old('caption') ?? $picture->caption }}" 
                         autocomplete="caption" autofocus>
                 </div>

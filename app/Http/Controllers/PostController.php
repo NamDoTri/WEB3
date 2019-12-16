@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
 
 class PostController extends Controller
 {
@@ -42,12 +42,19 @@ class PostController extends Controller
         auth()->user()->posts()->create($data);
         return redirect('/');
     }
-    public function update(){
+    public function update(\App\Picture $picture){
         $data = request()->validate([
-            'caption' => '',
-            'image' => 'required|image',
+            'picture' => 'required | image',
+            'caption' => ''
         ]);
-        $picture->update($data);
+        
+        $imagePath = request('picture')->store('/uploads/images', 'public');
+        
+        $toSave = [
+            'filepath' => '/'.$imagePath,
+            'caption' => $data['caption']
+        ];
+        $picture->update($toSave);
         return redirect('/');
     }
 }
