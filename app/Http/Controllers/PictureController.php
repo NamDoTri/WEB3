@@ -11,7 +11,7 @@ use Auth;
 class PictureController extends Controller
 {
     public function __contruct(){
-        //$this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
@@ -65,6 +65,7 @@ class PictureController extends Controller
         $user_id = auth()->user()->id;
         $request->validate([
             'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'file' => 'max:500000'
         ]);
         $image = $request->file('file');
         $picture = new Picture;
