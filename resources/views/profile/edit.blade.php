@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <form action="/profile/{{$user->id}}" method=post>
+    <form action="/profile/{{$user->id}}" method=post enctype='multipart/form-data'>
     @csrf
     @method('PATCH')
 
@@ -12,13 +12,18 @@
                     <h2>Edit profile</h2>
                 </div>
 
-                <!-- <div class="row">
-                    <label for="image" class="col-md-4 col-form-label text-md-right">Update profile picture</label>
-                    <input type="file" class=form-control-file id=image name=image>
-                    @if ($errors->has('image'))
-                        <strong>{{ $errors->first('image') }}</strong>
-                    @endif
-                </div> -->
+                <div class="row">
+                    <div>
+                        <img src="{{$user->profile->profile_picture->filepath ?? 'https://www.sackettwaconia.com/wp-content/uploads/default-profile.png'}}">
+                    </div>
+                    <div class="pt-3">
+                        <label for="picture" style="cursor: pointer;" class="btn btn-primary p-1">Choose another picture</label>
+                        <input type="file" class=form-control-file id=picture name=picture style="display: none">
+                        @if ($errors->has('picture'))
+                            <strong>{{ $errors->first('picture') }}</strong>
+                        @endif
+                    </div>
+                </div>
 
                 <div class="form-group row">
                     <label for="name" class="col-md-4 col-form-label text-md-right">Username</label>
