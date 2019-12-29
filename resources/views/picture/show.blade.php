@@ -21,9 +21,18 @@
         <div>
             <button>Agree</button> or <button>Disagree</button>
         </div>
+        @cannot('update', $picture->user->profile)
+            <div class='pt-2'>
+                <a href="/crits/create/{{$picture->id}}">Write another review</a>
+            </div>
+        @endcannot
     @else
         <div>No reviews available yet.</div>
-        <a href="/crits/create/{{$picture->id}}">Write a review</a>
+        @cannot('update', $picture->user->profile)
+            <div class='pt-2'>
+                <a href="/crits/create/{{$picture->id}}">Write a review</a>
+            </div>
+        @endcannot
     @endif
     </div>
 </div>
