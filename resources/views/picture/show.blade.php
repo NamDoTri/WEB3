@@ -11,16 +11,19 @@
         <div>Credit: <b>{{$picture->user->profile->name}}</b></div>
     </div>
 
-    @if(!is_null($picture->critic))
-        <div>
-            <h4>{{$picture->critic->title}}</h4>
-            A critic by <b>{{$picture->critic->user->profile->name}}</b>
-            <p>{{$picture->critic->review}}</p>
-        </div>
-        <div>Do you <br>
-        <div>
-            <button>Agree</button> or <button>Disagree</button>
-        </div>
+    @if(!is_null($picture->critics))
+        @foreach($picture->critics as $critic)
+            <div>
+                <h4>{{$critic->title}}</h4>
+                A critic by <b>{{$critic->user->profile->name}}</b>
+                <p>{{$critic->review}}</p>
+            </div>
+            <div>Do you <br>
+            <div>
+                <button>Agree</button> or <button>Disagree</button>
+            </div> 
+        @endforeach
+
         @cannot('update', $picture->user->profile)
             <div class='pt-2'>
                 <a href="/crits/create/{{$picture->id}}">Write another review</a>
