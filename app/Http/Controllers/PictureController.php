@@ -24,6 +24,9 @@ class PictureController extends Controller
         if (!Auth::check()) {
             return redirect('/login');   
         }
+        if (auth()->user()->hasRole('admin')) {
+            return redirect('/admin');
+        }
         if (!auth()->user()->hasRole('picture')) {
             return redirect('/');   
         }
@@ -58,6 +61,9 @@ class PictureController extends Controller
     {
         if (!Auth::check()) {
             return redirect('/login');   
+        }
+        if (auth()->user()->hasRole('admin')) {
+            return redirect('/admin');
         }
         if (!auth()->user()->hasRole('picture')) {
             return redirect('/');   
@@ -104,6 +110,9 @@ class PictureController extends Controller
         if (!Auth::check()) {
             return redirect('/login');   
         }
+        if (auth()->user()->hasRole('admin')) {
+            return redirect('/admin');
+        }
         if (!auth()->user()->hasRole('picture')) {
             return redirect('/');   
         }
@@ -124,6 +133,9 @@ class PictureController extends Controller
     {
         if (!Auth::check()) {
             return redirect('/login');   
+        }
+        if (auth()->user()->hasRole('admin')) {
+            return redirect('/admin');
         }
         if (!auth()->user()->hasRole('picture')) {
             return redirect('/');   
@@ -154,11 +166,14 @@ class PictureController extends Controller
         if (!Auth::check()) {
             return redirect('/login');   
         }
-        if (!auth()->user()->hasRole('picture')) {
+        if (!auth()->user()->hasRole('picture') && !auth()->user()->hasRole('admin')) {
             return redirect('/');   
         }
-        Picture::where('id',$id)->delete();
+        Picture::where('id', $id)->delete();
    
+        if (auth()->user()->hasRole('admin')) {
+            return Redirect::to('admin')->with('success','Picture deleted successfully');
+        }
         return Redirect::to('pictures')->with('success','Picture deleted successfully');
     }
 }
