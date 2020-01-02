@@ -19,9 +19,15 @@
                 A critic by <b>{{$critic->user->profile->name}}</b>
                 <p>{{$critic->review}}</p>
             </div>
+            
+            <div>
+                Agrees: {{$critic->likers()->get()->count()}}
+                <!-- Disagrees: {{$critic->downvoters()->get()->count()}} -->
+            </div>
+
             <div>Do you <br>
             <div>
-                <agree crit-id="{{ $critic->id }}"></agree> or <disagree></disagree>
+                <agree crit-id="{{ $critic->id }}"></agree> or <disagree crit-id="{{ $critic->id }}"></disagree>
             </div> 
         @endforeach
 
