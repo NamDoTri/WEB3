@@ -36,7 +36,7 @@ class ProfileController extends Controller
             $image = Image::make(public_path("{$imagePath}"))->fit(1000, 1000);
             $image->save();
 
-            $imageArray = ['profile_picture' => $imagePath];
+            $imageArray = ['profile_picture' => '/'.$imagePath];
         }
 
         auth()->user()->profile->update(array_merge(
