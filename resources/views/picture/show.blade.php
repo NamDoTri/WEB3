@@ -11,7 +11,8 @@
         <div>Credit: <b>{{$picture->user->profile->name}}</b></div>
     </div>
 
-    @if(!is_null($picture->critics))
+
+    @if(sizeof($picture->critics) != 0)
         @foreach($picture->critics as $critic)
             <div>
                 <h4>{{$critic->title}}</h4>
