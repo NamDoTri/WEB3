@@ -176,6 +176,9 @@ return [
 
         // Image manipulation provider
         Intervention\Image\ImageServiceProvider::class,
+
+        // Overtrue Follow
+        Overtrue\LaravelFollow\FollowServiceProvider::class,
     ],
 
     /*
