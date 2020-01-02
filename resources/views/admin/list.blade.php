@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<h2 class="text-center m-4">Uploaded images</a></h2>
+<h2 class="text-center m-4">Recent images</a></h2>
 
   <br>
    <div class="card-columns">
