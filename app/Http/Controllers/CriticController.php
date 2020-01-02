@@ -25,4 +25,7 @@ class CriticController extends Controller
         Critic::create($data);
         return redirect('/');
     }
+    public function agree(\App\Critic $crit){
+        return $crit->title;
+    }
 }

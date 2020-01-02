@@ -30,4 +30,6 @@ Route::get('/crits/show', 'CriticController@show');
 Route::get('/crits/create/{picture}', 'CriticController@create');
 Route::post('/crits/upload/{picture}', 'CriticController@store');
 
+Route::post('/critic/agree/{crit}', 'CriticController@agree');
+
 Route::resource('pictures', 'PictureController'); 
