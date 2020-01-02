@@ -38,19 +38,11 @@
 @endcan
 <!--Posts go here-->
 <div class="row pt-3">
-    @if ($user->role =='picture')
-        <div class="col-3 d-flex">
-        @foreach($user->pictures as $picture)
-            <a href="{{route('pictures.show', $picture->id )}}" class='p-2'><img src="{{$picture->filepath}}" width=250px></a>
-        @endforeach
-        </div>
-    @else
-    <div class="col-3">
-        @foreach($user->critics as $critic)
-            <a href="{{route('pictures.show', $critic->picture->id )}}"><img src="{{$critic->picture->filepath}}" width=250px></a>
-        @endforeach
-        </div>
-    @endif
+    <div class="col-3 d-flex">
+    @foreach($user->pictures as $picture)
+        <a href="{{route('pictures.show', $picture->id )}}" class='p-2'><img src="{{$picture->filepath}}" width=250px></a>
+    @endforeach
+    </div>
 </div>
 
 @endsection
