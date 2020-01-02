@@ -27,9 +27,6 @@ class PictureController extends Controller
         if (auth()->user()->hasRole('admin')) {
             return redirect('/admin');
         }
-        if (!auth()->user()->hasRole('picture')) {
-            return redirect('/');   
-        }
         $user_id = auth()->user()->id;
         $data['pictures'] = Picture::orderBy('id','desc')->where('user_id', $user_id)->paginate(10);
         return view('picture.list',$data);
@@ -44,9 +41,6 @@ class PictureController extends Controller
     {
         if (!Auth::check()) {
             return redirect('/login');   
-        }
-        if (!auth()->user()->hasRole('picture')) {
-            return redirect('/');   
         }
         return view('picture.create');
     }
@@ -64,9 +58,6 @@ class PictureController extends Controller
         }
         if (auth()->user()->hasRole('admin')) {
             return redirect('/admin');
-        }
-        if (!auth()->user()->hasRole('picture')) {
-            return redirect('/');   
         }
         $user_id = auth()->user()->id;
         $request->validate([
@@ -113,9 +104,6 @@ class PictureController extends Controller
         if (auth()->user()->hasRole('admin')) {
             return redirect('/admin');
         }
-        if (!auth()->user()->hasRole('picture')) {
-            return redirect('/');   
-        }
         $where = array('id' => $id);
         $data['picture_info'] = Picture::where($where)->first();
  
@@ -136,9 +124,6 @@ class PictureController extends Controller
         }
         if (auth()->user()->hasRole('admin')) {
             return redirect('/admin');
-        }
-        if (!auth()->user()->hasRole('picture')) {
-            return redirect('/');   
         }
         $request->validate([
             'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -165,9 +150,6 @@ class PictureController extends Controller
     {
         if (!Auth::check()) {
             return redirect('/login');   
-        }
-        if (!auth()->user()->hasRole('picture') && !auth()->user()->hasRole('admin')) {
-            return redirect('/');   
         }
         Picture::where('id', $id)->delete();
    

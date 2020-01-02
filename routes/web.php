@@ -29,7 +29,9 @@ Route::get('/crits/{user}', 'CriticController@index');
 Route::get('/crits/show', 'CriticController@show');
 Route::get('/crits/create/{picture}', 'CriticController@create');
 Route::post('/crits/upload/{picture}', 'CriticController@store');
+Route::delete('/crits/destroy/{critic}', 'CriticController@destroy');
 
 Route::get('/admin', 'AdminController@index');
+Route::get('/admin/critics', 'AdminController@critics');
 
 Route::resource('pictures', 'PictureController'); 
