@@ -16,7 +16,7 @@ class Picture extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function critic(){
-        return $this->hasOne(Critic::class);
+    public function critics(){
+        return $this->hasMany(Critic::class);
     }
 }
