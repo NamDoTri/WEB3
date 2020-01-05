@@ -37,11 +37,16 @@ class CriticController extends Controller
         Critic::create($data);
         return redirect('/');
     }
+
     public function destroy($id){
         if (!Auth::check()) {
             return redirect('/login');   
         }
         Critic::where('id', $id)->delete();
         return Redirect::to('admin/critics')->with('success','Comment deleted successfully');
+    }
+
+    public function agree(\App\Critic $crit){
+        return $crit->title;
     }
 }
