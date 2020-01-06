@@ -20,7 +20,7 @@
             </div>
             <div>Do you <br>
             <div>
-                <button>Agree</button> or <button>Disagree</button>
+                <agree crit-id="{{ $critic->id }}"></agree> or <disagree></disagree>
             </div> 
         @endforeach
 

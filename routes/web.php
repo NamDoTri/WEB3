@@ -34,4 +34,6 @@ Route::delete('/crits/destroy/{critic}', 'CriticController@destroy');
 Route::get('/admin', 'AdminController@index');
 Route::get('/admin/critics', 'AdminController@critics');
 
+Route::post('/critic/agree/{crit}', 'CriticController@agree');
+
 Route::resource('pictures', 'PictureController'); 

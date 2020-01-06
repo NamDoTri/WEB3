@@ -4,7 +4,7 @@
 <!--Header of personal profile page-->
 <div class="row">
     <div class="col-3 p-5">
-        <img src="/<?php echo $user->profile->profile_picture ?? 'https://www.sackettwaconia.com/wp-content/uploads/default-profile.png' ?>" class="rounded-circle" height=190px>
+        <img src="<?php echo $user->profile->profile_picture ?? 'https://www.sackettwaconia.com/wp-content/uploads/default-profile.png' ?>" class="rounded-circle" height=190px>
     </div>
     <div class="col-9 p-5">
         <div><h2>{{$user->profile->name}}</h2></div>
@@ -36,16 +36,11 @@
 @endcan
 <!--Posts go here-->
 <div class="row pt-3">
-        <div class="col-3 d-flex">
-        @foreach($user->pictures as $picture)
-            <a href="{{route('pictures.show', $picture->id )}}" class='p-2'><img src="{{$picture->filepath}}" width=250px></a>
-        @endforeach
-        </div>
-    {{--<div class="col-3">
-        @foreach($user->critics as $critic)
-            <a href="{{route('pictures.show', $critic->picture->id )}}"><img src="{{$critic->picture->filepath}}" width=250px></a>
-        @endforeach
-        </div>--}}
+    <div class="col-3 d-flex">
+    @foreach($user->pictures as $picture)
+        <a href="{{route('pictures.show', $picture->id )}}" class='p-2'><img src="{{$picture->filepath}}" width=250px></a>
+    @endforeach
+    </div>
 </div>
 
 @endsection

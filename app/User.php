@@ -61,7 +61,9 @@ class User extends Authenticatable
     public function critics(){
         return $this->hasMany(Critic::class)->orderBy('created_at', 'DESC');
     }
-
+    public function agreeings(){
+        return $this->belongsToMany(Critic::class);
+    }
     public function hasRole($role) {
         return $this->getAttribute('role') == $role;
     }

@@ -13,4 +13,7 @@ class Critic extends Model
     public function picture(){
         return $this->belongsTo(Picture::class);
     }
+    public function agreers(){
+        return $this->belongsToMany(User::class);
+    }
 }

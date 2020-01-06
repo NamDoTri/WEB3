@@ -20,6 +20,9 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('insta-update', require('./components/insta-update.vue').default);
+Vue.component('agree', require('./components/agree.vue').default);
+Vue.component('disagree', require('./components/disagree.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
