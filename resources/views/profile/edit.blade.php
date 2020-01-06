@@ -46,6 +46,21 @@
                         value="{{ old('description') ?? $user->profile->description }}" 
                         autocomplete="description" autofocus>
                 </div>
+                <div class="form-group row">
+                    <label for="effect" class="col-md-4 col-form-label text-md-right">Effect</label>
+
+                    <select id="effect" 
+                        class="form-control @error('effect') is-invalid @enderror" 
+                        name="effect" 
+                        value="{{ old('effect') ?? $user->profile->effect }}" 
+                        autocomplete="effect" autofocus>
+                        <option value='none'>None</option>
+                        <option value='grey'>Greyscale</option>
+                        <option value='star'>Star shape</option>
+                        <option value='pixelate'>Pixelate</option>
+                        <option value='invert'>Invert</option>
+                    </select>
+                </div>
 
                 <div class="row">
                     <button class="btn btn-primary">Save changes</button>

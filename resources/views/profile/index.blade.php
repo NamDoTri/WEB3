@@ -4,7 +4,7 @@
 <!--Header of personal profile page-->
 <div class="row">
     <div class="col-3 p-5">
-        <img src="<?php echo $user->profile->profile_picture ?? 'https://www.sackettwaconia.com/wp-content/uploads/default-profile.png' ?>" class="rounded-circle" height=190px>
+        <img src="<?php echo $img ?? 'https://www.sackettwaconia.com/wp-content/uploads/default-profile.png' ?>" class="rounded-circle" height=190px>
     </div>
     <div class="col-9 p-5">
         <div><h2>{{$user->profile->name}}</h2></div>
