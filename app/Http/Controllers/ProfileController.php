@@ -21,7 +21,7 @@ class ProfileController extends Controller
             $img = ImageManager::make($filePath)->fit(200);
             if ($user->profile->effect == 'star') {
                 $overlay = ImageManager::make('star.png')->fit(200);
-                $img->insert($overlay, 'center');
+                $img->mask($overlay);
             } else if ($user->profile->effect == 'grey') {
                 $img->greyscale();
             } else if ($user->profile->effect == 'pixelate') {

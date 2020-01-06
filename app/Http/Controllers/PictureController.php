@@ -61,9 +61,8 @@ class PictureController extends Controller
         }
         $user_id = auth()->user()->id;
         $request->validate([
-            'caption' => '',
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'file' => 'max:500000'
+            'caption' => 'required|min:6',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048|max:500000',
         ]);
         $image = $request->file('file');
         $picture = new Picture;
@@ -126,7 +125,8 @@ class PictureController extends Controller
             return redirect('/admin');
         }
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'caption' => 'required|min:6',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048|max:500000',
         ]);
         $image = $request->file('file');
         $imageName = time() . '.' . $image->getClientOriginalExtension();

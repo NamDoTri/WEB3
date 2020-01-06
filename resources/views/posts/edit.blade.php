@@ -11,7 +11,15 @@
                 <div class="row">
                     <h2>Edit post</h2>
                 </div>
-
+                @if ($errors->any())
+    <div class='mb-4'>
+        <ul class='list-group'>
+            @foreach ($errors->all() as $error)
+                <li class='list-group-item list-group-item-danger'>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
                 <div class="row">
                     <div>
                         <img src="{{$picture->filepath}}">
@@ -19,9 +27,6 @@
                     <div class="pt-3">
                         <label for="picture" style="cursor: pointer;" class="btn btn-primary p-1">Choose another picture</label>
                         <input type="file" class=form-control-file id=picture name=picture style="display: none">
-                        @if ($errors->has('picture'))
-                            <strong>{{ $errors->first('picture') }}</strong>
-                        @endif
                     </div>
                 </div>
 
