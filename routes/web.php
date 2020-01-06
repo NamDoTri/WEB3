@@ -35,5 +35,6 @@ Route::get('/admin', 'AdminController@index');
 Route::get('/admin/critics', 'AdminController@critics');
 
 Route::post('/critic/agree/{crit}', 'CriticController@agree');
+Route::post('/critic/disagree/{crit}', 'CriticController@disagree');
 
 Route::resource('pictures', 'PictureController'); 

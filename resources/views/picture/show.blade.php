@@ -11,16 +11,23 @@
         <div>Credit: <b>{{$picture->user->profile->name}}</b></div>
     </div>
 
-    @if(!is_null($picture->critics))
+
+    @if(sizeof($picture->critics) != 0)
         @foreach($picture->critics as $critic)
             <div>
                 <h4>{{$critic->title}}</h4>
                 A critic by <b>{{$critic->user->profile->name}}</b>
                 <p>{{$critic->review}}</p>
             </div>
+            
+            <div>
+                Agrees: {{$critic->likers()->get()->count()}}
+                <!-- Disagrees: {{$critic->downvoters()->get()->count()}} -->
+            </div>
+
             <div>Do you <br>
             <div>
-                <agree crit-id="{{ $critic->id }}"></agree> or <disagree></disagree>
+                <agree crit-id="{{ $critic->id }}"></agree> or <disagree crit-id="{{ $critic->id }}"></disagree>
             </div> 
         @endforeach
 
