@@ -1853,6 +1853,7 @@ __webpack_require__.r(__webpack_exports__);
     agree: function agree() {
       axios.post('/critic/agree/' + this.critId).then(function (response) {
         console.log(response.data);
+        window.location.reload();
       });
     }
   }
@@ -1884,6 +1885,7 @@ __webpack_require__.r(__webpack_exports__);
     disagree: function disagree() {
       axios.post('/critic/disagree/' + this.critId).then(function (response) {
         console.log(response.data);
+        window.location.reload();
       });
     }
   }

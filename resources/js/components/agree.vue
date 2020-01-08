@@ -16,6 +16,7 @@
                 axios.post('/critic/agree/' + this.critId)
                     .then(response => {
                         console.log(response.data)
+                        window.location.reload();
                     })
             }
         }
