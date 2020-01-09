@@ -29,14 +29,15 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <li class="nav-item d-flex align-items-center">
-                    <form action="/search" method=post>
-                        @csrf
-                        <input type="text" placeholder="Type in a username..." name=username>
-                        <button class="btn btn-light">Search</button>
-                    </form>
-                </li>
-
+                @auth
+                    <li class="nav-item d-flex align-items-center">
+                        <form action="/search" method=post>
+                            @csrf
+                            <input type="text" placeholder="Type in a username..." name=username>
+                            <button class="btn btn-light">Search</button>
+                        </form>
+                    </li>
+                @endauth
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
