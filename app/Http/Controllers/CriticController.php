@@ -47,6 +47,17 @@ class CriticController extends Controller
     }
 
     public function agree(\App\Critic $crit){
-        return $crit->title;
+        $user = auth()->user();
+        try{
+            // return $user->vote($crit);   // because vote feature does not work
+            return $user->like($crit);
+        }catch(Exception $e){
+            return $e->message;
+        }
+    }
+    public function disagree(\App\Critic $crit){
+        $user = auth()->user();
+        // return $user->downvote($crit);
+        return $user->unlike($crit);
     }
 }
