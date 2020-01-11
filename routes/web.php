@@ -38,3 +38,4 @@ Route::post('/critic/agree/{crit}', 'CriticController@agree');
 Route::post('/critic/disagree/{crit}', 'CriticController@disagree');
 
 Route::resource('pictures', 'PictureController'); 
+Route::get('pictures/export/{picture}', 'PictureController@export');

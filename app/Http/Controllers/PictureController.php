@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use App\Picture;
+use PDF;
 use Log;
 use Auth;
+use Intervention\Image\ImageManagerStatic as ImageManager;
 
 class PictureController extends Controller
 {
@@ -86,6 +88,13 @@ class PictureController extends Controller
      */
     public function show(\App\Picture $picture)
     {
+        $filePath = (substr($picture->filepath, 0, 1) == '/') ? substr($picture->filepath, 1, strlen($picture->filepath)) : $picture->filepath;
+        //$filePath = (substr($picture->filepath, 0, 1) == '/' ? substr($picture->filePath, 1, strlen($picture->filepath)) : $picture->filepath);
+        //return $filePath;
+        $img = ImageManager::make($filePath)->fit(1000);
+        $watermak = ImageManager::make('watermark.png')->fit(1000);
+        $img->insert($watermak);
+        $picture->filepath = $img->encode('data-url');
         return view('picture/show', compact('picture'));
     }
 
@@ -157,5 +166,26 @@ class PictureController extends Controller
             return Redirect::to('admin')->with('success','Picture deleted successfully');
         }
         return Redirect::to('pictures')->with('success','Picture deleted successfully');
+    }
+
+    public function export(\App\Picture $picture)
+    {
+        if (!Auth::check()) {
+            return redirect('/login');   
+        }
+        $filePath = (substr($picture->filepath, 0, 1) == '/') ? substr($picture->filepath, 1, strlen($picture->filepath)) : $picture->filepath;
+        //$filePath = (substr($picture->filepath, 0, 1) == '/' ? substr($picture->filePath, 1, strlen($picture->filepath)) : $picture->filepath);
+        $img = ImageManager::make($filePath)->fit(1000);
+        $watermak = ImageManager::make('watermark.png')->fit(1000);
+        $img->insert($watermak);
+        $picture->filepath = $img->encode('data-url');
+        $data = [
+            'title' => 'Extraction of picture from ' . $picture->user->profile->name,
+            'heading' => 'Extraction of picture from ' . $picture->user->profile->name,
+            'content' => $picture->caption,
+            'picture' => $picture,
+        ];          
+        $pdf = PDF::loadView('picture.export', $data);  
+        return $pdf->download('mockInsta_export_picture_id_' . $picture->id . '.pdf');
     }
 }

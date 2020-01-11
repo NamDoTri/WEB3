@@ -12,12 +12,6 @@ class PostController extends Controller
 
     public function index(){
         $user = auth()->user();
-
-        // if($user->role == "picture"){
-        //     return redirect('/profile/'.$user->id);
-        // }else{
-        //     return redirect('/crits/'.$user->id);
-        // }
         return redirect('/profile/'.$user->id);
     }
 
