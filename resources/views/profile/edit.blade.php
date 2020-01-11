@@ -17,12 +17,21 @@
                         <img src="{{$user->profile->profile_picture->filepath ?? 'https://www.sackettwaconia.com/wp-content/uploads/default-profile.png'}}">
                     </div>
                     <div class="pt-3">
-                        <label for="picture" style="cursor: pointer;" class="btn btn-primary p-1">Choose another picture</label>
-                        <input type="file" class=form-control-file id=picture name=picture style="display: none">
-                        @if ($errors->has('picture'))
-                            <strong>{{ $errors->first('picture') }}</strong>
-                        @endif
-                    </div>
+                    @if ($errors->any())
+                        <div class='mb-4'>
+                            <ul class='list-group'>
+                                @foreach ($errors->all() as $error)
+                                    <li class='list-group-item list-group-item-danger'>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                <label for="picture" style="cursor: pointer;" class="btn btn-primary p-1">Choose another picture</label>
+                <input type="file" class=form-control-file id=picture name=picture style="display: none">
+                @if ($errors->has('picture'))
+                    <strong>{{ $errors->first('picture') }}</strong>
+                @endif
+                </div>
                 </div>
 
                 <div class="form-group row">

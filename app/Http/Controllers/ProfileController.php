@@ -44,7 +44,7 @@ class ProfileController extends Controller
 
         $data = request()->validate([
             'name' => 'required',
-            'description' => '',
+            'description' => 'required',
             'effect' => 'required',
             // 'picture' => ''
         ]);
