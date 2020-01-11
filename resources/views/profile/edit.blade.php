@@ -17,12 +17,21 @@
                         <img src="{{$user->profile->profile_picture->filepath ?? 'https://www.sackettwaconia.com/wp-content/uploads/default-profile.png'}}">
                     </div>
                     <div class="pt-3">
-                        <label for="picture" style="cursor: pointer;" class="btn btn-primary p-1">Choose another picture</label>
-                        <input type="file" class=form-control-file id=picture name=picture style="display: none">
-                        @if ($errors->has('picture'))
-                            <strong>{{ $errors->first('picture') }}</strong>
-                        @endif
-                    </div>
+                    @if ($errors->any())
+                        <div class='mb-4'>
+                            <ul class='list-group'>
+                                @foreach ($errors->all() as $error)
+                                    <li class='list-group-item list-group-item-danger'>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                <label for="picture" style="cursor: pointer;" class="btn btn-primary p-1">Choose another picture</label>
+                <input type="file" class=form-control-file id=picture name=picture style="display: none">
+                @if ($errors->has('picture'))
+                    <strong>{{ $errors->first('picture') }}</strong>
+                @endif
+                </div>
                 </div>
 
                 <div class="form-group row">
@@ -45,6 +54,21 @@
                         name="description" 
                         value="{{ old('description') ?? $user->profile->description }}" 
                         autocomplete="description" autofocus>
+                </div>
+                <div class="form-group row">
+                    <label for="effect" class="col-md-4 col-form-label text-md-right">Effect</label>
+
+                    <select id="effect" 
+                        class="form-control @error('effect') is-invalid @enderror" 
+                        name="effect" 
+                        value="{{ old('effect') ?? $user->profile->effect }}" 
+                        autocomplete="effect" autofocus>
+                        <option value='none'>None</option>
+                        <option value='grey'>Greyscale</option>
+                        <option value='star'>Star shape</option>
+                        <option value='pixelate'>Pixelate</option>
+                        <option value='invert'>Invert</option>
+                    </select>
                 </div>
 
                 <div class="row">

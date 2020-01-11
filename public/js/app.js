@@ -1876,8 +1876,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['critId'],
   mounted: function mounted() {
     console.log('Component mounted.');
+  },
+  methods: {
+    disagree: function disagree() {
+      axios.post('/critic/disagree/' + this.critId).then(function (response) {
+        console.log(response.data);
+      });
+    }
   }
 });
 
@@ -37242,9 +37250,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("button", { staticClass: "btn btn-primary" }, [
-    _vm._v("\n        Disagree\n")
-  ])
+  return _c(
+    "button",
+    { staticClass: "btn btn-primary", on: { click: _vm.disagree } },
+    [_vm._v("\n        Disagree\n")]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

@@ -13,7 +13,15 @@
                 <div>
                     <img src="{{$picture->filepath}}">
                 </div>
-
+                @if ($errors->any())
+                        <div class='mb-4'>
+                            <ul class='list-group'>
+                                @foreach ($errors->all() as $error)
+                                    <li class='list-group-item list-group-item-danger'>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                @endif
                 <div class="form-group row">
                     <label for="title" class="col-md-4 col-form-label text-md-right">Title</label>
 
