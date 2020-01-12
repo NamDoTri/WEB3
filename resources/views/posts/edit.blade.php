@@ -11,7 +11,15 @@
                 <div class="row">
                     <h2>Edit post</h2>
                 </div>
-
+                @if ($errors->any())
+    <div class='mb-4'>
+        <ul class='list-group'>
+            @foreach ($errors->all() as $error)
+                <li class='list-group-item list-group-item-danger'>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
                 <div class="row">
                     <div>
                         <img src="{{$picture->filepath}}">

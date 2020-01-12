@@ -57,9 +57,12 @@
                                 </li>
                             @endif
                         @else
-                            
+                            @if (Auth::user()->hasRole('admin'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/pictures') }}">{{ __('Pictures') }}</a>
+                                <a class="nav-link" href="{{ url('/admin') }}">{{ __('Pictures') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/admin/critics') }}">{{ __('Critics') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/">Profile</a>
@@ -81,6 +84,29 @@
                                     </form>
                                 </div>
                             </li>
+                            @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/pictures') }}">{{ __('Posts manager') }}</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/profile/{{ Auth::user()->id }}">Profile</a>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                            @endif
                         @endguest
                     </ul>
                 </div>
@@ -89,6 +115,11 @@
 
         <main class="py-4">
             <div class="container py-2">
+                @if(session()->has('success'))
+                    <div class="alert alert-success">
+                        {{ session()->get('success') }}
+                    </div>
+                @endif
                 <div class="row justify-content-center">
                     <div class="col-md-10">
                         @yield('content')

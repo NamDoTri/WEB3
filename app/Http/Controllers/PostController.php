@@ -12,12 +12,6 @@ class PostController extends Controller
 
     public function index(){
         $user = auth()->user();
-
-        // if($user->role == "picture"){
-        //     return redirect('/profile/'.$user->id);
-        // }else{
-        //     return redirect('/crits/'.$user->id);
-        // }
         return redirect('/profile/'.$user->id);
     }
 
@@ -35,8 +29,8 @@ class PostController extends Controller
 
     public function store(){
         $data = request()->validate([
-            'caption' => '',
-            'image' => 'required|image',
+            'caption' => 'required|min:6',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048|max:500000',
         ]);
 
         auth()->user()->posts()->create($data);
@@ -44,8 +38,8 @@ class PostController extends Controller
     }
     public function update(\App\Picture $picture){
         $data = request()->validate([
-            'picture' => 'required | image',
-            'caption' => ''
+            'caption' => 'required|min:6',
+            'file' => 'required|simage|mimes:jpeg,png,jpg,gif,svg|max:2048|max:500000',
         ]);
         
         $imagePath = request('picture')->store('/uploads/images', 'public');

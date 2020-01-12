@@ -30,11 +30,9 @@
         <!-- <a href="/instagram/update/{{$user->id}}">Update Instagram pictures</a> -->
         <!-- <insta-update></insta-update> -->
     </div>
-    @if ($user->role=='picture')
     <div>
         <a href="{{route('pictures.create')}}" class="pb-2 btn btn-primary">Add a new picture</a>
     </div>
-    @endif
 @endcan
 <!--Posts go here-->
 <div class="row pt-3">

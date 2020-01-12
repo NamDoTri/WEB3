@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use App\Picture;
+use PDF;
 use Log;
 use Auth;
+use Intervention\Image\ImageManagerStatic as ImageManager;
 
 class PictureController extends Controller
 {
     public function __contruct(){
-        //$this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
@@ -24,8 +26,8 @@ class PictureController extends Controller
         if (!Auth::check()) {
             return redirect('/login');   
         }
-        if (!auth()->user()->hasRole('picture')) {
-            return redirect('/');   
+        if (auth()->user()->hasRole('admin')) {
+            return redirect('/admin');
         }
         $user_id = auth()->user()->id;
         $data['pictures'] = Picture::orderBy('id','desc')->where('user_id', $user_id)->paginate(10);
@@ -42,9 +44,6 @@ class PictureController extends Controller
         if (!Auth::check()) {
             return redirect('/login');   
         }
-        if (!auth()->user()->hasRole('picture')) {
-            return redirect('/');   
-        }
         return view('picture.create');
     }
 
@@ -59,13 +58,13 @@ class PictureController extends Controller
         if (!Auth::check()) {
             return redirect('/login');   
         }
-        if (!auth()->user()->hasRole('picture')) {
-            return redirect('/');   
+        if (auth()->user()->hasRole('admin')) {
+            return redirect('/admin');
         }
         $user_id = auth()->user()->id;
         $request->validate([
-            'caption' => '',
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'caption' => 'required|min:6',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048|max:500000',
         ]);
         $image = $request->file('file');
         $picture = new Picture;
@@ -89,6 +88,13 @@ class PictureController extends Controller
      */
     public function show(\App\Picture $picture)
     {
+        $filePath = (substr($picture->filepath, 0, 1) == '/') ? substr($picture->filepath, 1, strlen($picture->filepath)) : $picture->filepath;
+        //$filePath = (substr($picture->filepath, 0, 1) == '/' ? substr($picture->filePath, 1, strlen($picture->filepath)) : $picture->filepath);
+        //return $filePath;
+        $img = ImageManager::make($filePath)->fit(1000);
+        $watermak = ImageManager::make('watermark.png')->fit(1000);
+        $img->insert($watermak);
+        $picture->filepath = $img->encode('data-url');
         return view('picture/show', compact('picture'));
     }
 
@@ -103,8 +109,8 @@ class PictureController extends Controller
         if (!Auth::check()) {
             return redirect('/login');   
         }
-        if (!auth()->user()->hasRole('picture')) {
-            return redirect('/');   
+        if (auth()->user()->hasRole('admin')) {
+            return redirect('/admin');
         }
         $where = array('id' => $id);
         $data['picture_info'] = Picture::where($where)->first();
@@ -124,11 +130,12 @@ class PictureController extends Controller
         if (!Auth::check()) {
             return redirect('/login');   
         }
-        if (!auth()->user()->hasRole('picture')) {
-            return redirect('/');   
+        if (auth()->user()->hasRole('admin')) {
+            return redirect('/admin');
         }
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'caption' => 'required|min:6',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048|max:500000',
         ]);
         $image = $request->file('file');
         $imageName = time() . '.' . $image->getClientOriginalExtension();
@@ -153,11 +160,32 @@ class PictureController extends Controller
         if (!Auth::check()) {
             return redirect('/login');   
         }
-        if (!auth()->user()->hasRole('picture')) {
-            return redirect('/');   
-        }
-        Picture::where('id',$id)->delete();
+        Picture::where('id', $id)->delete();
    
+        if (auth()->user()->hasRole('admin')) {
+            return Redirect::to('admin')->with('success','Picture deleted successfully');
+        }
         return Redirect::to('pictures')->with('success','Picture deleted successfully');
+    }
+
+    public function export(\App\Picture $picture)
+    {
+        if (!Auth::check()) {
+            return redirect('/login');   
+        }
+        $filePath = (substr($picture->filepath, 0, 1) == '/') ? substr($picture->filepath, 1, strlen($picture->filepath)) : $picture->filepath;
+        //$filePath = (substr($picture->filepath, 0, 1) == '/' ? substr($picture->filePath, 1, strlen($picture->filepath)) : $picture->filepath);
+        $img = ImageManager::make($filePath)->fit(1000);
+        $watermak = ImageManager::make('watermark.png')->fit(1000);
+        $img->insert($watermak);
+        $picture->filepath = $img->encode('data-url');
+        $data = [
+            'title' => 'Extraction of picture from ' . $picture->user->profile->name,
+            'heading' => 'Extraction of picture from ' . $picture->user->profile->name,
+            'content' => $picture->caption,
+            'picture' => $picture,
+        ];          
+        $pdf = PDF::loadView('picture.export', $data);  
+        return $pdf->download('mockInsta_export_picture_id_' . $picture->id . '.pdf');
     }
 }

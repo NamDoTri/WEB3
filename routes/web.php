@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'PostController@index');
+Route::get('/', 'HomeController@index');
 
 Auth::routes();
 
@@ -37,3 +37,9 @@ Route::get('/search', "SearchController@index");
 Route::post('/search', "SearchController@search" );
 
 Route::resource('pictures', 'PictureController'); 
+Route::delete('/crits/destroy/{critic}', 'CriticController@destroy');
+
+Route::get('/admin', 'AdminController@index');
+Route::get('/admin/critics', 'AdminController@critics');
+
+Route::get('pictures/export/{picture}', 'PictureController@export');

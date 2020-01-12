@@ -5,8 +5,15 @@
     <div>
         <div>
             <h2>{{$picture->caption}}</h2>
-            <span class='float-right'><b>{{$picture->likes}}</b> people liked this post</span>
-            <img src="{{$picture->filepath}}" width=600>
+            <div class='row'>
+                <div class='col-9'>
+                    <img src="{{$picture->filepath}}" width=600>
+                </div>
+                <div class='col-3'>
+                    <p><b>{{$picture->likes}}</b> people liked this post</p>
+                    <a class='btn btn-primary' href="/pictures/export/{{$picture->id}}">Export to PDF</a>
+                </div>
+            </div>
         </div>
         <div>Credit: <b>{{$picture->user->profile->name}}</b></div>
     </div>

@@ -19,6 +19,7 @@ class CreateProfilesTable extends Migration
             $table->string('profile_picture')->nullable();
             $table->string('name')->unique();
             $table->integer('followers');
+            $table->string('effect')->default('none');
             $table->integer('following');
             $table->text('description');
             $table->timestamps();
