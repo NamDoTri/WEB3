@@ -2,11 +2,15 @@
 
 @section('content')
 <div class="container">
-    @foreach($items as $user)
-    <div>
-        <img src="{{$user->profile->profile_picture ?? 'https://www.sackettwaconia.com/wp-content/uploads/default-profile.png'}}" width=70>
-        <b><a href="/profile/{{$user->id}}">{{$user->name}}</a></b>    
-    </div>
-    @endforeach
+    @if( sizeof($items) != 0 )
+        @foreach($items as $user)
+        <div>
+            <img src="{{$user->profile->profile_picture ?? 'https://www.sackettwaconia.com/wp-content/uploads/default-profile.png'}}" width=70>
+            <b><a href="/profile/{{$user->id}}">{{$user->name}}</a></b>    
+        </div>
+        @endforeach
+    @else
+        <p>No users with this username found.</p>
+    @endif
 </div>
 @endsection
