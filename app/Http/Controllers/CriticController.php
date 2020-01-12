@@ -60,4 +60,8 @@ class CriticController extends Controller
         // return $user->downvote($crit);
         return $user->unlike($crit);
     }
+    public function showAgrees(\App\Critic $crit){
+        $items = $crit->likers()->get();
+        return view('search/show', compact('items'));
+    }
 }

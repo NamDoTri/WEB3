@@ -32,6 +32,7 @@ Route::post('/crits/upload/{picture}', 'CriticController@store');
 
 Route::post('/critic/agree/{crit}', 'CriticController@agree');
 Route::post('/critic/disagree/{crit}', 'CriticController@disagree');
+Route::get('/critic/showagrees/{crit}', 'CriticController@showAgrees');
 
 Route::get('/search', "SearchController@index");
 Route::post('/search', "SearchController@search" );

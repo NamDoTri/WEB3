@@ -28,7 +28,7 @@
             </div>
             
             <div>
-                Agrees: {{$critic->likers()->get()->count()}}
+                <a href="/critic/showagrees/{{$critic->id}}">Agrees: {{$critic->likers()->get()->count()}}</a>
                 <!-- Disagrees: {{$critic->downvoters()->get()->count()}} -->
             </div>
 
