@@ -32,10 +32,15 @@
                 <!-- Disagrees: {{$critic->downvoters()->get()->count()}} -->
             </div>
 
+            @if( auth()->user()->hasLiked($critic) )
+            <div>You agreed.</div>
+            <disagree crit-id="{{ $critic->id }}"></disagree>
+            @else
             <div>Do you <br>
             <div>
                 <agree crit-id="{{ $critic->id }}"></agree> or <disagree crit-id="{{ $critic->id }}"></disagree>
-            </div> 
+            </div>
+            @endif
         @endforeach
 
         @cannot('update', $picture->user->profile)
